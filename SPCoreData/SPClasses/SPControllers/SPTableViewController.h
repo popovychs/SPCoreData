@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  SPTableViewController.h
 //  SPCoreData
 //
 //  Created by popovychs on 16.11.15.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface SPTableViewController : UITableViewController
 
 @end
-
