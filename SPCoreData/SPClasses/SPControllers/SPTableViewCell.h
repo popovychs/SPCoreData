@@ -12,5 +12,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *cellDateLabel;
 @property (weak, nonatomic) IBOutlet UITextView *cellNoteTextView;
+@property (weak, nonatomic) IBOutlet UIButton *cellEditButton;
+@property (weak, nonatomic) IBOutlet UIButton *cellDeleteButton;
+@property (weak, nonatomic) IBOutlet UIButton *cellPhotoButton;
 
 @end
