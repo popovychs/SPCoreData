@@ -20,6 +20,7 @@
 		3E81AC7A1BFA86F0008E97B3 /* SPPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E81AC741BFA86F0008E97B3 /* SPPhoto.m */; };
 		3E81AC7B1BFA86F0008E97B3 /* SPNote+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E81AC761BFA86F0008E97B3 /* SPNote+CoreDataProperties.m */; };
 		3E81AC7C1BFA86F0008E97B3 /* SPNote.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E81AC781BFA86F0008E97B3 /* SPNote.m */; };
+		3E81AC801BFA8CC4008E97B3 /* SPDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E81AC7F1BFA8CC4008E97B3 /* SPDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,8 @@
 		3E81AC761BFA86F0008E97B3 /* SPNote+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SPNote+CoreDataProperties.m"; path = "SPClasses/SPModel/SPNote+CoreDataProperties.m"; sourceTree = "<group>"; };
 		3E81AC771BFA86F0008E97B3 /* SPNote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPNote.h; path = SPClasses/SPModel/SPNote.h; sourceTree = "<group>"; };
 		3E81AC781BFA86F0008E97B3 /* SPNote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPNote.m; path = SPClasses/SPModel/SPNote.m; sourceTree = "<group>"; };
+		3E81AC7E1BFA8CC4008E97B3 /* SPDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SPDetailViewController.h; path = SPClasses/SPControllers/SPDetailViewController.h; sourceTree = "<group>"; };
+		3E81AC7F1BFA8CC4008E97B3 /* SPDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SPDetailViewController.m; path = SPClasses/SPControllers/SPDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +89,8 @@
 				3E81AC691BFA79CB008E97B3 /* SPTableViewController.m */,
 				3E81AC6B1BFA7A09008E97B3 /* SPTableViewCell.h */,
 				3E81AC6C1BFA7A09008E97B3 /* SPTableViewCell.m */,
+				3E81AC7E1BFA8CC4008E97B3 /* SPDetailViewController.h */,
+				3E81AC7F1BFA8CC4008E97B3 /* SPDetailViewController.m */,
 				3E81AC7D1BFA86FE008E97B3 /* SPModel */,
 				3E81AC571BFA78C9008E97B3 /* Main.storyboard */,
 				3E81AC5D1BFA78C9008E97B3 /* Assets.xcassets */,
@@ -194,6 +199,7 @@
 				3E81AC6A1BFA79CB008E97B3 /* SPTableViewController.m in Sources */,
 				3E81AC7A1BFA86F0008E97B3 /* SPPhoto.m in Sources */,
 				3E81AC5C1BFA78C9008E97B3 /* SPCoreData.xcdatamodeld in Sources */,
+				3E81AC801BFA8CC4008E97B3 /* SPDetailViewController.m in Sources */,
 				3E81AC791BFA86F0008E97B3 /* SPPhoto+CoreDataProperties.m in Sources */,
 				3E81AC531BFA78C9008E97B3 /* AppDelegate.m in Sources */,
 				3E81AC701BFA7FF9008E97B3 /* SPCoreDataController.m in Sources */,
