@@ -33,7 +33,6 @@
                                             <rect key="frame" x="8" y="37" width="304" height="74"/>
                                             <animations/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                         </textView>
@@ -41,16 +40,25 @@
                                             <rect key="frame" x="274" y="119" width="30" height="30"/>
                                             <animations/>
                                             <state key="normal" title="Edit"/>
+                                            <connections>
+                                                <action selector="cellEditButton:" destination="cRC-ch-ad6" eventType="touchUpInside" id="VAj-cc-PT4"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UFC-Ia-80R">
                                             <rect key="frame" x="221" y="119" width="45" height="30"/>
                                             <animations/>
                                             <state key="normal" title="Delete"/>
+                                            <connections>
+                                                <action selector="cellDeleteButton:" destination="cRC-ch-ad6" eventType="touchUpInside" id="ywp-zS-2eW"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="boh-Qe-fcw">
                                             <rect key="frame" x="170" y="119" width="41" height="30"/>
                                             <animations/>
                                             <state key="normal" title="Photo"/>
+                                            <connections>
+                                                <action selector="cellPhotoButton:" destination="cRC-ch-ad6" eventType="touchUpInside" id="smD-SP-1IX"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <animations/>
@@ -91,7 +99,7 @@
         <!--New Note-->
         <scene sceneID="jRk-sW-2hf">
             <objects>
-                <viewController id="5sg-cR-3LR" customClass="SPDetailViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="newNoteView" id="5sg-cR-3LR" customClass="SPDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="AWb-1Z-8mA"/>
                         <viewControllerLayoutGuide type="bottom" id="Y15-Rd-ggG"/>
@@ -100,11 +108,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="A0f-hV-FrD">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="justified" translatesAutoresizingMaskIntoConstraints="NO" id="A0f-hV-FrD">
                                 <rect key="frame" x="20" y="112" width="280" height="160"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>

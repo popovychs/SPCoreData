@@ -7,6 +7,7 @@
 //
 
 #import "SPTableViewController.h"
+#import "SPDetailViewController.h"
 #import "SPTableViewCell.h"
 #import "SPCoreDataController.h"
 #import "SPNote+CoreDataProperties.h"
@@ -25,12 +26,11 @@
     
     self.title = @"Easy Note";
     
-    [self welcomeMessage];
-    
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
+    [self welcomeMessage];
     [self updateNotes];
     [self updatePhotos];
     [self.tableView reloadData];
@@ -129,6 +129,50 @@
     cell.cellEditButton.tag = indexPath.row;
     cell.cellDeleteButton.tag = indexPath.row;
     
+}
+
+#pragma mark - Cell Buttons
+
+- (IBAction)cellEditButton:(UIButton *)sender {
+    
+    SPDetailViewController * editNoteController = [self.storyboard instantiateViewControllerWithIdentifier:@"newNoteView"];
+    editNoteController.title = @"Editing";
+    
+    NSIndexPath * currentPath = [NSIndexPath indexPathForRow:sender.tag inSection:0];
+    SPNote * currentNote = [self.arrayOfNotes objectAtIndex:currentPath.row];
+    editNoteController.selectedNote = currentNote;
+    
+    [self.navigationController pushViewController:editNoteController animated:YES];
+    
+}
+
+- (IBAction)cellDeleteButton:(UIButton *)sender {
+    
+    SPCoreDataController * coreDataManager = [SPCoreDataController sharedInstance];
+    NSUInteger index = sender.tag;
+    SPNote * currentNote = [self.arrayOfNotes objectAtIndex:index];
+    [coreDataManager.managedObjectContext deleteObject:currentNote];
+    
+    NSError * error = nil;
+    if (![coreDataManager.managedObjectContext save:&error])
+    {
+        NSLog(@"Can't delete - %@ %@", error, [error localizedDescription]);
+    }
+    else
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Message" message:@"Note was deleted" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+        });
+    }
+    [self updateNotes];
+    [self updatePhotos];
+    [self.tableView reloadData];
+    
+}
+
+- (IBAction)cellPhotoButton:(UIButton *)sender {
 }
 
 /*

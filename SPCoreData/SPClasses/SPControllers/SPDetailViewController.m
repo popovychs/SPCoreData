@@ -50,6 +50,41 @@
 }
 
 - (IBAction)saveButton:(UIButton *)sender {
+    
+    if (self.detailTextView.text.length)
+    {
+        SPNote * newNote;
+        if (!self.selectedNote)
+        {
+            newNote = [NSEntityDescription insertNewObjectForEntityForName:@"Note" inManagedObjectContext:self.coreDataManager.managedObjectContext];
+        }
+        else newNote = self.selectedNote;
+        
+        newNote.textDescription = self.detailTextView.text;
+        newNote.timeStamp = [NSDate date];
+        
+        NSError * error = nil;
+        if (![self.coreDataManager.managedObjectContext save:&error])
+        {
+            NSLog(@"Can't save note text - %@ %@", error, [error localizedDescription]);
+        }
+        else
+        {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Done" message:@"Successfully saved" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                [alert show];
+            });
+        }
+        
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    else
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"No text" message:@"Note is empty. Add some text." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+        });
 }
 
 - (IBAction)cancelButton:(UIButton *)sender {
