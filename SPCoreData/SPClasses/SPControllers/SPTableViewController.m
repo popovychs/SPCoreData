@@ -7,8 +7,14 @@
 //
 
 #import "SPTableViewController.h"
+#import "SPTableViewCell.h"
+#import "SPCoreDataController.h"
+#import "SPNote+CoreDataProperties.h"
+#import "SPPhoto+CoreDataProperties.h"
 
 @interface SPTableViewController ()
+
+@property (strong, nonatomic) NSMutableArray * arrayOfNotes;
 
 @end
 
@@ -17,6 +23,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self welcomeMessage];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -24,32 +32,107 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self updateNotes];
+    [self updatePhotos];
+    [self.tableView reloadData];
+}
+
+#pragma mark - Welcome Message
+
+- (void) welcomeMessage
+{
+    if (!self.arrayOfNotes.count)
+    {
+        UILabel * welcomeMessage =[[UILabel alloc] initWithFrame:
+                                 CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+        welcomeMessage.text = @"No Note! Let's create one now. Touch + on the top right corner";
+        welcomeMessage.textColor = [UIColor blueColor];
+        welcomeMessage.textAlignment = NSTextAlignmentCenter;
+        welcomeMessage.numberOfLines = 0;
+        self.tableView.backgroundView = welcomeMessage;
+    }
+    else self.tableView.backgroundView = nil;
+}
+
+#pragma mark - Update Notes and Photos
+
+- (void) updateNotes
+{
+    SPCoreDataController * coreDataManager = [SPCoreDataController sharedInstance];
+    NSFetchRequest * fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Note"];
+    [self.arrayOfNotes removeAllObjects];
+    self.arrayOfNotes = [[coreDataManager.managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    [self sortNotesByTime];
+}
+
+- (void) updatePhotos
+{
+//    SPCoreDataController * coreDataManager = [SPCoreDataController sharedInstance];
+//    NSFetchRequest * fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Photo"];
+//    
+//    NSMutableArray * photoArray = [[coreDataManager.managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+//    for (SPPhoto * photo in photoArray)
+//    {
+//        if (photo.notesWithPhoto.count == 0)
+//        {
+//            [coreDataManager.managedObjectContext deleteObject:photo];
+//        }
+//    }
+//    
+//    NSError * error = nil;
+//    if (![coreDataManager.managedObjectContext save:&error])
+//    {
+//        NSLog(@"Can't delete photo - %@ %@", error, [error localizedDescription]);
+//    }
+    
+}
+
+- (void) sortNotesByTime
+{
+    NSSortDescriptor * sortDescriptor;
+    sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"timeStamp" ascending:NO];
+    NSArray * sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    NSArray * sortedArray = [self.arrayOfNotes sortedArrayUsingDescriptors:sortDescriptors];
+    self.arrayOfNotes = [sortedArray mutableCopy];
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
-    return 0;
+    return self.arrayOfNotes.count;
 }
 
-/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
     
-    // Configure the cell...
+    SPTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    
+    [self prepareNoteCell:cell atIndexPath:indexPath];
     
     return cell;
 }
-*/
+
+- (void)prepareNoteCell:(SPTableViewCell*)cell atIndexPath: (NSIndexPath*)indexPath
+{
+    SPNote * newNote = [self.arrayOfNotes objectAtIndex:indexPath.row];
+    cell.cellNoteTextView.text = newNote.textDescription;
+    cell.cellNoteTextView.textAlignment = NSTextAlignmentJustified;
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"uk_UK"]];
+    NSString * dateFormat = @"dd MMMM yyyy, HH:mm";
+    [formatter setDateFormat:dateFormat];
+    cell.cellDateLabel.text = [formatter stringFromDate:newNote.timeStamp];
+    cell.cellPhotoButton.tag = indexPath.row;
+    cell.cellEditButton.tag = indexPath.row;
+    cell.cellDeleteButton.tag = indexPath.row;
+    
+}
 
 /*
 // Override to support conditional editing of the table view.
